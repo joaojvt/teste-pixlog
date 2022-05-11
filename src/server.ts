@@ -1,13 +1,15 @@
 import express from 'express'
+import { PrismaClient } from '@prisma/client'
+
 import routes from './routes'
 
 const PORT = 3000
-
 const server = express()
+const prisma = new PrismaClient()
 
 server.use(routes)
 
-const httpServer = server.listen(PORT, '0.0.0.0',  () =>{
+const httpServer = server.listen(PORT, '0.0.0.0', () => {
   console.log(`server listening to ${PORT}`)
 })
 
@@ -25,13 +27,12 @@ process.on('unhandledRejection', (error) => {
 
 
 function grafulShutdown(event: string) {
-  return (code:number) => {
+  return (code: number) => {
     console.log(`${event} received! with ${code}`)
     // garantimos que nenhum cliente vai entrar nessa aplicação no periodo
     // mas quem está em alguma transação, termina o que está fazendo
     httpServer.close(() => {
-      console.log('http server closed')
-      console.log('DB connection closed')
+      prisma.$disconnect()
       process.exit(code)
     })
   }
