@@ -10,8 +10,11 @@
     "build": "tsc",
     "build:dev": "tsc --watch"
   },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "keywords": [],
-  "author": "",
+  "author": "Joao Vitor",
   "license": "ISC",
   "devDependencies": {
     "@types/body-parser": "^1.19.2",
@@ -28,6 +31,7 @@
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "helmet": "^5.0.2",
     "postgresql": "0.0.1",
     "prisma": "^3.14.0"
   }

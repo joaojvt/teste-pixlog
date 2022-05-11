@@ -1,13 +1,15 @@
 import express from 'express'
+import bodyParser from 'body-parser'
+import helmet from 'helmet'
 import { PrismaClient } from '@prisma/client'
 
 import routes from './routes'
-import bodyParser from 'body-parser'
 
 const PORT = 3000
 const prisma = new PrismaClient()
 const server = express()
 
+server.use(helmet())
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
