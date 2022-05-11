@@ -12,7 +12,7 @@ const upload = multer({ dest: 'uploads/', limits: { fileSize: MAX_FILE_SIZE } })
 routes.get('/users', userController.findAll.bind(userController))
 routes.post('/save-files', upload.single('updaloadFile'), userController.saveFile.bind(userController))
 
-routes.use('*', (req, res) => res.send({ message: '404 - URL inesistente!' }))
+routes.use('*', (req, res) => res.send({ message: '404 - URL inexistente!' }))
 
 
 export default routes
