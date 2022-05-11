@@ -3,15 +3,30 @@ version: '3.8'
 services:
   postgres:
     image: postgres:13
-    container_name: postgresprisma
+    container_name: postgres_teste_pixlog
     restart: always
     ports:
       - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=docker123
+      - POSTGRES_DB=teste_pixlog
     env_file:
       - .env
     volumes:
       - postgres:/var/lib/postgresql/data
+  # api:
+  #   build: .
+  #   volumes:
+  #     - .:/app
+  #   ports:
+  #     - 3000:3000
+  #   env_file:
+  #     - .env
+  #   command: npm run start:dev
+  #   depends_on:
+  #     - postgres
 
 volumes:
   postgres:
-    name: nest-prisma-docker-db
+    name: postgres_teste_pixlog
