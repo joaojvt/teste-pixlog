@@ -11,8 +11,17 @@ datasource db {
 }
 
 model User {
-  id      Int    @id @default(autoincrement())
-  name    String @db.VarChar(255)
-  email   String @unique @db.VarChar(50)
-  storage Int?   @default(0) 
+  id      Int     @id @default(autoincrement())
+  name    String  @db.VarChar(255)
+  email   String  @unique @db.VarChar(50)
+  storage Int?    @default(0)
+  Files   Files[]
+}
+
+model Files {
+  id       Int    @id @default(autoincrement())
+  filePath String @db.VarChar(255)
+  fileName String @db.VarChar(255)
+  user     User   @relation(fields: [userId], references: [id])
+  userId   Int
 }
